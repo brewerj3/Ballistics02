@@ -9,6 +9,7 @@
 /// @date   03_Sep_2022
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <stdio.h>
 #include "newtonCalculation.h"
 #include <math.h>
 
@@ -39,12 +40,12 @@ void updatePosition(){
     forceOfAirOnShell = -(0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity);
 
     //Find the current acceleration of the shell Horizontally
-    currentHorizontalAcceleration =( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell );
+    currentHorizontalAcceleration = (( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell ) / ( massOfShell ));
 
     //Find the current acceleration of the shell Vertically
-    currentVerticalAcceleration = ( sin(currentShellAngle)*forceOfAirOnShell + sin(angleOfGravity)*massOfShell );
+    currentVerticalAcceleration = (( sin(currentShellAngle)*forceOfAirOnShell + sin(angleOfGravity)*massOfShell ) / ( massOfShell ) );
 
-    //Find the current position after one millisecond
+    //Find the next position after one millisecond
     nextHorizontalPosition = currentHorizontalDistance + (( cos(currentShellAngle) * currentVelocity )/1000);
     nextVerticalPosition = currentHeight + (( sin(currentShellAngle) * currentVelocity)/1000);
 
@@ -52,9 +53,13 @@ void updatePosition(){
     currentVelocity = currentVelocity-(sqrt(currentVerticalAcceleration*currentVerticalAcceleration + currentHorizontalAcceleration*currentHorizontalAcceleration))/1000;
 
     //Update the current shell angle
-    currentShellAngle = atan( (nextVerticalPosition-currentHeight) / (nextHorizontalPosition-currentHorizontalDistance) );
+    currentShellAngle = atan( (nextVerticalPosition-currentHeight) / (nextHorizontalPosition-currentHorizontalDistance) ); ///@TODO this does not work properly yet
 
     //Update the current positions
     currentHorizontalDistance = nextHorizontalPosition;
     currentHeight = nextVerticalPosition;
+
+    //Update the current time
+    currentTime++;
+    printf("Time: %5.i X: %5.f Y: %5.f Angle %5.f\n",currentTime,currentHorizontalDistance,currentHeight,currentShellAngle);
 }

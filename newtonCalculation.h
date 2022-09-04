@@ -12,6 +12,7 @@
 #define UNTITLED1_NEWTONCALCULATION_H
 
 #pragma once
+#include <math.h>
 
 extern const double angleOfGunInDegrees; //Angles
 extern const double initialVelocity;  //Meters per Second
