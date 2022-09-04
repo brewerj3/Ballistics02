@@ -8,7 +8,10 @@
 /// @author Joshua Brewer <brewerj3@hawaii.edu>
 /// @date   03_Sep_2022
 ///////////////////////////////////////////////////////////////////////////////
+
 #include "newtonCalculation.h"
+#include <math.h>
+
 const double angleOfGunInDegrees = 41; //Angle
 const double initialVelocity = 823;  //Meters per Second
 const double massOfShell = 1315;  //Kilograms
@@ -22,13 +25,18 @@ double currentHorizontalDistance = 0;
 double currentHeight = 0;
 double currentVelocity = initialVelocity;
 double forceOfAirOnShell = 0;
+double currentShellAngle = angleOfGunInDegrees*(3.14159265358979323846/180);
 unsigned currentTime = 0;
 
 double nextHorizontalPosition = 0;
 double nextVerticalPosition = 0;
+double currentHorizontalAcceleration = 0;
+double currentVerticalAcceleration = 0;
 
 void updatePosition(){
     //Find the force of the air on the shell
     forceOfAirOnShell = -(0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity);
+    //Find the current acceleration of the shell Horizontally
+
 
 }

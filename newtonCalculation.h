@@ -26,11 +26,14 @@ extern double currentHorizontalDistance; //Distance Shell has currently traveled
 extern double currentHeight; //Current Height of the Shell
 extern double currentVelocity; //Current Shell Velocity
 extern double forceOfAirOnShell; //Current force of air on shell
+extern double currentShellAngle; //Current Angle of shell
 extern unsigned currentTime; //Current time in millisecond
 
 
 extern double nextHorizontalPosition;
 extern double nextVerticalPosition;
+extern double currentHorizontalAcceleration;
+extern double currentVerticalAcceleration;
 
 extern void updatePosition(); //Updates the position of the shell currently
 
