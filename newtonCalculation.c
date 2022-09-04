@@ -16,17 +16,19 @@ const double forceOfGravity = 9.8; //Meters per Second per second
 const double airDensity = 1.225;
 const double dragCoefficiant = 0.1;
 const double shellDiameter = 0.4064; //Diameter of Shell in meters
+const double shellArea = (0.25)*(3.14159265358979323846)*(shellDiameter*shellDiameter);
 
 double currentHorizontalDistance = 0;
 double currentHeight = 0;
 double currentVelocity = initialVelocity;
+double forceOfAirOnShell = 0;
 unsigned currentTime = 0;
 
 double nextHorizontalPosition = 0;
 double nextVerticalPosition = 0;
 
 void updatePosition(){
-    //First find the force of the air on the shell
-    double forceOfAirOnShell = -(1/2)*
+    //Find the force of the air on the shell
+    forceOfAirOnShell = -(0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity);
 
 }
