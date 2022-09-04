@@ -39,16 +39,16 @@ double currentXVelocity = 0;
 double a1 = 0;
 double totalAcceleration = 0; //total magnitude of acceleration
 double angleOfAcceleration = 0; //angle of acceleration of projectile
+double xAxis = 0;
+double yAxis = 0;
 
 void updatePosition(){
     //Find the force of the air on the shell
     forceOfAirOnShell = -(0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity);
 
-    //Find the current acceleration in one millisecond of the shell Horizontally
-    //currentHorizontalAcceleration = (( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell ) / ( massOfShell ));
+    xAxis = (( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell + cos(currentShellAngle)*currentVelocity) ); // adds the effect of drag and gravity in the x axis
+    yAxis = (( sin(currentShellAngle)*forceOfAirOnShell + sin(angleOfGravity)*massOfShell + sin(currentShellAngle)*currentVelocity) ); // adds the effect of drag and gravity in the y axis
 
-    //Find the current acceleration of the shell Vertically
-    currentVerticalAcceleration = (( sin(currentShellAngle)*forceOfAirOnShell + sin(angleOfGravity)*massOfShell ) / ( massOfShell ) );
 
     //Find the next position after one millisecond
     nextHorizontalPosition = currentHorizontalDistance + (( cos(currentShellAngle) * currentVelocity )/1000);
