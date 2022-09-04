@@ -44,8 +44,8 @@ void updatePosition(){
     //Find the force of the air on the shell
     forceOfAirOnShell = -(0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity);
 
-    //Find the current acceleration of the shell Horizontally
-    currentHorizontalAcceleration = (( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell ) / ( massOfShell ));
+    //Find the current acceleration in one millisecond of the shell Horizontally
+    //currentHorizontalAcceleration = (( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell ) / ( massOfShell ));
 
     //Find the current acceleration of the shell Vertically
     currentVerticalAcceleration = (( sin(currentShellAngle)*forceOfAirOnShell + sin(angleOfGravity)*massOfShell ) / ( massOfShell ) );
@@ -55,9 +55,9 @@ void updatePosition(){
     nextVerticalPosition = currentHeight + (( sin(currentShellAngle) * currentVelocity)/1000);
 
     //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
-    currentYVelocity = sin(currentShellAngle)*currentVelocity;
-    currentXVelocity = cos(currentShellAngle)*currentVelocity;
-    totalAcceleration = ((sqrt(currentVerticalAcceleration*currentVerticalAcceleration + currentHorizontalAcceleration*currentHorizontalAcceleration))/1000);
+    currentYVelocity = sin(currentShellAngle)*currentVelocity-currentVerticalAcceleration;
+    currentXVelocity = cos(currentShellAngle)*currentVelocity-currentHorizontalAcceleration;
+    totalAcceleration = ((sqrt(currentXVelocity + currentYVelocity))/1000);
     currentShellAngle = atan( (nextVerticalPosition-currentHeight) / (nextHorizontalPosition-currentHorizontalDistance) ); ///@TODO this does not work properly yet
 
     //Update the current velocity

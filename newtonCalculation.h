@@ -14,28 +14,28 @@
 #pragma once
 #include <math.h>
 
-extern const double angleOfGunInDegrees; //Angles
-extern const double initialVelocity;  //Meters per Second
-extern const double massOfShell;  //Kilograms
-extern const double forceOfGravity; // Force of Gravity
-extern const double angleOfGravity;
-extern const double airDensity; //Density of Air
-extern const double dragCoefficiant; // drag coefficient
-extern const double shellDiameter; //Diameter of Shell
-extern const double shellArea; //Area of Shell
+const double angleOfGunInDegrees; //Angles
+const double initialVelocity;  //Meters per Second
+const double massOfShell;  //Kilograms
+const double forceOfGravity; // Force of Gravity
+const double angleOfGravity;
+const double airDensity; //Density of Air
+const double dragCoefficiant; // drag coefficient
+const double shellDiameter; //Diameter of Shell
+const double shellArea; //Area of Shell
 
 
-extern double currentHorizontalDistance; //Distance Shell has currently traveled horizontally
-extern double currentHeight; //Current Height of the Shell
-extern double currentVelocity; //Current Shell Velocity
-extern double forceOfAirOnShell; //Current force of air on shell
-extern double currentShellAngle; //Current Angle of shell
-extern unsigned currentTime; //Current time in millisecond
+double currentHorizontalDistance; //Distance Shell has currently traveled horizontally
+double currentHeight; //Current Height of the Shell
+double currentVelocity; //Current Shell Velocity
+double forceOfAirOnShell; //Current force of air on shell
+double currentShellAngle; //Current Angle of shell
+unsigned currentTime; //Current time in millisecond
 
-extern double nextHorizontalPosition;
-extern double nextVerticalPosition;
-extern double currentHorizontalAcceleration;
-extern double currentVerticalAcceleration;
+double nextHorizontalPosition;
+double nextVerticalPosition;
+double currentHorizontalAcceleration;
+double currentVerticalAcceleration;
 
 extern void updatePosition(); //Updates the position of the shell currently
 
