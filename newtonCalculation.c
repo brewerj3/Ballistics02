@@ -34,6 +34,11 @@ double nextHorizontalPosition = 0;
 double nextVerticalPosition = 0;
 double currentHorizontalAcceleration = 0;
 double currentVerticalAcceleration = 0;
+double currentYVelocity = 0;
+double currentXVelocity = 0;
+double a1 = 0;
+double totalAcceleration = 0; //total magnitude of acceleration
+double angleOfAcceleration = 0; //angle of acceleration of projectile
 
 void updatePosition(){
     //Find the force of the air on the shell
@@ -49,11 +54,14 @@ void updatePosition(){
     nextHorizontalPosition = currentHorizontalDistance + (( cos(currentShellAngle) * currentVelocity )/1000);
     nextVerticalPosition = currentHeight + (( sin(currentShellAngle) * currentVelocity)/1000);
 
-    //Find the total acceleration of the Shell in one millisecond and update the current velocity
-    currentVelocity = currentVelocity-(sqrt(currentVerticalAcceleration*currentVerticalAcceleration + currentHorizontalAcceleration*currentHorizontalAcceleration))/1000;
-
-    //Update the current shell angle
+    //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
+    currentYVelocity = sin(currentShellAngle)*currentVelocity;
+    currentXVelocity = cos(currentShellAngle)*currentVelocity;
+    totalAcceleration = ((sqrt(currentVerticalAcceleration*currentVerticalAcceleration + currentHorizontalAcceleration*currentHorizontalAcceleration))/1000);
     currentShellAngle = atan( (nextVerticalPosition-currentHeight) / (nextHorizontalPosition-currentHorizontalDistance) ); ///@TODO this does not work properly yet
+
+    //Update the current velocity
+    currentVelocity = currentVelocity-(sqrt(currentVerticalAcceleration*currentVerticalAcceleration + currentHorizontalAcceleration*currentHorizontalAcceleration))/1000;
 
     //Update the current positions
     currentHorizontalDistance = nextHorizontalPosition;
