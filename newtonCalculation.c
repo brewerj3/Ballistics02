@@ -46,6 +46,7 @@ void updatePosition(){
     //Find the force of the air on the shell
     forceOfAirOnShell = -(0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity);
 
+    //Find Acceleration in both axis
     xAxis = (( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell + cos(currentShellAngle)*currentVelocity) ); // adds the effect of drag and gravity in the x axis
     yAxis = (( sin(currentShellAngle)*forceOfAirOnShell + sin(angleOfGravity)*massOfShell + sin(currentShellAngle)*currentVelocity) ); // adds the effect of drag and gravity in the y axis
 
@@ -55,6 +56,9 @@ void updatePosition(){
     nextVerticalPosition = currentHeight + (( sin(currentShellAngle) * currentVelocity)/1000);
 
     //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
+
+
+
     currentYVelocity = sin(currentShellAngle)*currentVelocity-currentVerticalAcceleration;
     currentXVelocity = cos(currentShellAngle)*currentVelocity-currentHorizontalAcceleration;
     totalAcceleration = ((sqrt(currentXVelocity + currentYVelocity))/1000);
