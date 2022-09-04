@@ -37,13 +37,24 @@ double currentVerticalAcceleration = 0;
 void updatePosition(){
     //Find the force of the air on the shell
     forceOfAirOnShell = -(0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity);
+
     //Find the current acceleration of the shell Horizontally
     currentHorizontalAcceleration =( cos(currentShellAngle)*forceOfAirOnShell + cos(angleOfGravity)*massOfShell );
+
     //Find the current acceleration of the shell Vertically
     currentVerticalAcceleration = ( sin(currentShellAngle)*forceOfAirOnShell + sin(angleOfGravity)*massOfShell );
-    //Find the current position after one millisecond and set the position
-    currentHorizontalDistance = currentHorizontalDistance + (( cos(currentShellAngle) * currentVelocity )/1000);
-    currentHeight = currentHeight + (( sin(currentShellAngle) * currentVelocity)/1000);
-    //Find the total acceleration of the Shell in one millisecond
 
+    //Find the current position after one millisecond
+    nextHorizontalPosition = currentHorizontalDistance + (( cos(currentShellAngle) * currentVelocity )/1000);
+    nextVerticalPosition = currentHeight + (( sin(currentShellAngle) * currentVelocity)/1000);
+
+    //Find the total acceleration of the Shell in one millisecond and update the current velocity
+    currentVelocity = currentVelocity-(sqrt(currentVerticalAcceleration*currentVerticalAcceleration + currentHorizontalAcceleration*currentHorizontalAcceleration))/1000;
+
+    //Update the current shell angle
+    currentShellAngle = atan( (nextVerticalPosition-currentHeight) / (nextHorizontalPosition-currentHorizontalDistance) );
+
+    //Update the current positions
+    currentHorizontalDistance = nextHorizontalPosition;
+    currentHeight = nextVerticalPosition;
 }
