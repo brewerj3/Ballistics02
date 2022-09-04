@@ -14,28 +14,14 @@
 #pragma once
 #include <math.h>
 
-const double angleOfGunInDegrees; //Angles
-const double initialVelocity;  //Meters per Second
-const double massOfShell;  //Kilograms
-const double forceOfGravity; // Force of Gravity
-const double angleOfGravity;
-const double airDensity; //Density of Air
-const double dragCoefficiant; // drag coefficient
-const double shellDiameter; //Diameter of Shell
-const double shellArea; //Area of Shell
 
 
-double currentHorizontalDistance; //Distance Shell has currently traveled horizontally
-double currentHeight; //Current Height of the Shell
-double currentVelocity; //Current Shell Velocity
-double forceOfAirOnShell; //Current force of air on shell
-double currentShellAngle; //Current Angle of shell
-unsigned currentTime; //Current time in millisecond
 
-double nextHorizontalPosition;
-double nextVerticalPosition;
-double currentHorizontalAcceleration;
-double currentVerticalAcceleration;
+extern double currentHorizontalDistance; //Distance Shell has currently traveled horizontally
+extern double currentHeight; //Current Height of the Shell
+extern double currentVelocity;
+
+extern unsigned currentTime; //Current time in millisecond
 
 extern void updatePosition(); //Updates the position of the shell currently
 

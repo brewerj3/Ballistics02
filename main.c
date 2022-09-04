@@ -4,9 +4,13 @@
 #include "newtonCalculation.h"
 
 int main() {
-    while(1) {
+    while(currentTime < 45000) {
         if(currentHeight < 0) { // if current height is less than zero the projectile has hit the ground
             printf("Height is less than 0 \n");
+            break;
+        }
+        if(currentVelocity < 0 ) {
+            printf("Velocity is less than 0 \n");
             break;
         }
         updatePosition();
