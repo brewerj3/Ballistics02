@@ -9,3 +9,10 @@
 /// @date   03_Sep_2022
 ///////////////////////////////////////////////////////////////////////////////
 #include "newtonCalculation.h"
+const double angleOfGunInDegrees = 41; //Angle
+const double initialVelocity = 823;  //Meters per Second
+const double massOfShell = 1315;  //Kilograms
+
+double currentHorizontalDistance = 0;
+double currentHeight = 0;
+
