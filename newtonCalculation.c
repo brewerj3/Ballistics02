@@ -36,34 +36,42 @@ double xAxisVelocity = 0;
 double xAxisAcceleration = 0;
 double yAxisVelocity = 0;
 double yAxisAcceleration = 0;
+double deltaY = 0;
+double deltaX = 0;
 
 void updatePosition(){
     //Find the force of the air on the shell in
-    forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity))/passesPerSecond);
+    forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity)));
 
     //Find Acceleration in both axis
-    xAxisAcceleration = (  ( cos(currentShellAngle)*forceOfAirOnShell) / (massOfShell) )/passesPerSecond; // x-axis acceleration from drag
-    yAxisAcceleration = (( (sin(currentShellAngle)*forceOfAirOnShell ) / (massOfShell)) - forceOfGravity)/passesPerSecond; //acceleration from drag and gravity
+    xAxisAcceleration = (  ( cos(currentShellAngle)*forceOfAirOnShell) / (massOfShell) )/(passesPerSecond*passesPerSecond); // x-axis acceleration from drag
+    yAxisAcceleration = (( (sin(currentShellAngle)*forceOfAirOnShell ) / (massOfShell)) - forceOfGravity)/(passesPerSecond*passesPerSecond); //acceleration from drag and gravity
 
-    xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) )/passesPerSecond; // calculate velocity in the x-axis
-    yAxisVelocity = (( sin(currentShellAngle)*currentVelocity) )/passesPerSecond; // calculate velocity in the y-axis
+    xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) ); // calculate velocity in the x-axis
+    deltaX = xAxisVelocity;
+    yAxisVelocity = (( sin(currentShellAngle)*currentVelocity) ); // calculate velocity in the y-axis
+    deltaY = yAxisVelocity;
 
 
-    //Find the next position after one millisecond
-    nextHorizontalPosition = currentHorizontalDistance + (xAxisVelocity);
-    nextVerticalPosition = currentHeight + (yAxisVelocity);
+    //Find the next position after one pass
+    nextHorizontalPosition = currentHorizontalDistance + (xAxisVelocity/passesPerSecond);
+    nextVerticalPosition = currentHeight + (yAxisVelocity/passesPerSecond);
 
     //update the velocity with the effects of drag and gravity
-    xAxisVelocity = xAxisVelocity-(xAxisAcceleration/passesPerSecond);
-    yAxisVelocity = yAxisVelocity-(yAxisAcceleration/passesPerSecond);
+    xAxisVelocity = xAxisVelocity-(xAxisAcceleration);
+    yAxisVelocity = yAxisVelocity-(yAxisAcceleration);
+
+    //Find change in velocity
+    deltaX = xAxisVelocity-currentHorizontalDistance;
+    deltaY = yAxisVelocity-currentHeight;
 
 
     //Update the current velocity
-    currentVelocity = ( sqrt( ((nextHorizontalPosition+xAxisVelocity)-currentHorizontalDistance)*((nextHorizontalPosition+xAxisVelocity)-currentHorizontalDistance) + ((nextVerticalPosition-yAxisVelocity)-currentHeight)*((nextVerticalPosition-yAxisVelocity)-currentHeight) )*passesPerSecond ) ;
+    currentVelocity = fabs( sqrt( ( (xAxisVelocity)*(xAxisVelocity) + (yAxisVelocity)*(yAxisVelocity) ) )) ;
 
     //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
     printf("Current shell angle before Calculation: %5.4f \n",currentShellAngle);
-    currentShellAngle = atan((xAxisVelocity-currentHorizontalDistance) / (yAxisVelocity-currentHeight) ); ///@TODO this does not work properly yet
+    currentShellAngle = atan((deltaY) / (deltaX) ); ///@TODO this does not work properly yet
     printf("Current shell angle after Calculation:  %5.4f \n",currentShellAngle);
 
 
