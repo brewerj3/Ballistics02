@@ -59,7 +59,7 @@ void updatePosition(){
 
 
     //Update the current velocity
-    currentVelocity = ( sqrt( (nextHorizontalPosition-currentHorizontalDistance)*(nextHorizontalPosition-currentHorizontalDistance) + (nextVerticalPosition-currentHeight)*(nextVerticalPosition-currentHeight) )*passesPerSecond ) ;
+    currentVelocity = ( sqrt( ((nextHorizontalPosition+xAxisVelocity)-currentHorizontalDistance)*((nextHorizontalPosition+xAxisVelocity)-currentHorizontalDistance) + ((nextVerticalPosition-yAxisVelocity)-currentHeight)*((nextVerticalPosition-yAxisVelocity)-currentHeight) )*passesPerSecond ) ;
 
     //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
     printf("Current shell angle before Calculation: %5.4f \n",currentShellAngle);
