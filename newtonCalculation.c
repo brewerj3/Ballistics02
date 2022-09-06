@@ -69,7 +69,7 @@ void updatePosition(){
 
     //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
     //printf("Current shell angle before Calculation: %5.4f \n",currentShellAngle);
-    currentShellAngle = atan((yAxisVelocity) / (xAxisVelocity) ); ///@TODO this does not work properly yet
+    currentShellAngle = atan((yAxisVelocity) / (xAxisVelocity) );
     //printf("Current shell angle after Calculation:  %5.4f \n",currentShellAngle);
 
 
