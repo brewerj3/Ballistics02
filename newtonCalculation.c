@@ -46,14 +46,14 @@ void updatePosition(){
     forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*((currentVelocity/passesPerSecond)*(currentVelocity/passesPerSecond))));
 
     //Find the force in both axis
-    xAxisForce = ( cos(currentShellAngle)*forceOfAirOnShell);
-    yAxisForce = ( sin(currentShellAngle)*forceOfAirOnShell) + (forceOfGravity/passesPerSecond);
+    xAxisForce = ( cos(currentShellAngle)*forceOfAirOnShell);                                       //This is in one Pass
+    yAxisForce = ( sin(currentShellAngle)*forceOfAirOnShell) + (forceOfGravity/passesPerSecond);    //This is in one Pass
 
     //Find Acceleration in both axis
-    xAxisAcceleration = (xAxisForce/massOfShell); // x-axis acceleration from drag
-    yAxisAcceleration = (yAxisForce/massOfShell); //acceleration from drag and gravity
+    xAxisAcceleration = (xAxisForce/massOfShell);                                                       // x-axis acceleration from drag             in one Pass
+    yAxisAcceleration = (yAxisForce/massOfShell);                                                       // y-axis acceleration from drag and gravity in one Pass
 
-    xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) ); // calculate velocity in the x-axis
+    xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) );                                     // calculate velocity in the x-axis
     deltaX = xAxisVelocity;
     yAxisVelocity = (( sin(currentShellAngle)*currentVelocity) ); // calculate velocity in the y-axis
     deltaY = yAxisVelocity;
