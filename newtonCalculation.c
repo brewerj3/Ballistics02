@@ -53,24 +53,16 @@ void updatePosition(){
     xAxisAcceleration = (xAxisForce/massOfShell);                                                       // x-axis acceleration from drag             in one Pass
     yAxisAcceleration = (yAxisForce/massOfShell);                                                       // y-axis acceleration from drag and gravity in one Pass
 
-    xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) );                                     // calculate velocity in the x-axis
+    //Find change in velocity
+    xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) + xAxisAcceleration );               // calculate velocity in the x-axis
     deltaX = xAxisVelocity;
-    yAxisVelocity = (( sin(currentShellAngle)*currentVelocity) ); // calculate velocity in the y-axis
+    yAxisVelocity = (( sin(currentShellAngle)*currentVelocity) + yAxisAcceleration);                // calculate velocity in the y-axis
     deltaY = yAxisVelocity;
 
 
     //Find the next position after one pass
     nextHorizontalPosition = currentHorizontalDistance + (xAxisVelocity/passesPerSecond);
     nextVerticalPosition = currentHeight + (yAxisVelocity/passesPerSecond);
-
-    //update the velocity with the effects of drag and gravity
-    xAxisVelocity = xAxisVelocity-(xAxisAcceleration);
-    yAxisVelocity = yAxisVelocity-(yAxisAcceleration);
-
-    //Find change in velocity
-    deltaX = xAxisVelocity-currentHorizontalDistance;
-    deltaY = yAxisVelocity-currentHeight;
-
 
     //Update the current velocity
     currentVelocity = fabs( sqrt( ( (xAxisVelocity)*(xAxisVelocity) + (yAxisVelocity)*(yAxisVelocity) ) )) ;
