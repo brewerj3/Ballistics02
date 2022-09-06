@@ -20,6 +20,7 @@
 extern double currentHorizontalDistance; //Distance Shell has currently traveled horizontally
 extern double currentHeight; //Current Height of the Shell
 extern double currentVelocity;
+extern double currentShellAngle;
 
 extern unsigned currentTime; //Current time in millisecond
 

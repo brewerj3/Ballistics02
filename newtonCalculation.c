@@ -19,7 +19,7 @@ const double massOfShell = 1315;  //Kilograms
 const double forceOfGravity = -9.8*(massOfShell); //Meters per Second per second
 const double airDensity = 1.225;
 const double dragCoefficiant = 0.1;
-const double shellDiameter = 0.4064; //Diameter of Shell in meters
+const double shellDiameter = (18*2.54); //Diameter of Shell in meters
 const double shellArea = (0.25)*(3.14159265358979323846)*(shellDiameter*shellDiameter);
 const double passesPerSecond = 1000;
 
@@ -43,7 +43,7 @@ double deltaX = 0;
 
 void updatePosition(){
     //Find the force of the air on the shell in one pass
-    forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*((currentVelocity/passesPerSecond)*(currentVelocity/passesPerSecond))));
+    forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*shellArea*((currentVelocity/passesPerSecond)*(currentVelocity/passesPerSecond))));
 
     //Find the force in both axis
     xAxisForce = ( cos(currentShellAngle)*forceOfAirOnShell);                                       //This is in one Pass
@@ -68,9 +68,9 @@ void updatePosition(){
     currentVelocity = fabs( sqrt( ( (xAxisVelocity)*(xAxisVelocity) + (yAxisVelocity)*(yAxisVelocity) ) )) ;
 
     //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
-    printf("Current shell angle before Calculation: %5.4f \n",currentShellAngle);
+    //printf("Current shell angle before Calculation: %5.4f \n",currentShellAngle);
     currentShellAngle = atan((deltaY) / (deltaX) ); ///@TODO this does not work properly yet
-    printf("Current shell angle after Calculation:  %5.4f \n",currentShellAngle);
+    //printf("Current shell angle after Calculation:  %5.4f \n",currentShellAngle);
 
 
     //Update the current positions
@@ -79,5 +79,5 @@ void updatePosition(){
 
     //Update the current time
     currentTime++;
-    printf("Time: [%5.i]  | X: [%5.2f]  | Y:  [%5.2f] | Angle  [%5.2f]  | Drag: [%5.4f]  |X-Axis acceleration: [%5.4f]  | Y-Axis acceleration: [%5.4f]  | Current Velocity [%5.4f]\n",currentTime,currentHorizontalDistance,currentHeight,currentShellAngle,forceOfAirOnShell,xAxisAcceleration,yAxisAcceleration,currentVelocity);
+    //printf("Time: [%5.i]  | X: [%5.2f]  | Y:  [%5.2f] | Angle  [%5.2f]  | Drag: [%5.4f]  |X-Axis acceleration: [%5.4f]  | Y-Axis acceleration: [%5.4f]  | Current Velocity [%5.4f]\n",currentTime,currentHorizontalDistance,currentHeight,currentShellAngle,forceOfAirOnShell,xAxisAcceleration,yAxisAcceleration,currentVelocity);
 }
