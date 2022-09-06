@@ -14,14 +14,14 @@
 #include <math.h>
 
 const double angleOfGunInDegrees = 40;              //Angle
-const double initialVelocity = 823;                 //Muzzle Velocity in Meters per Second
-const double massOfShell = 1315;                    //Kilograms
+const double initialVelocity = 914;                 //Muzzle Velocity in Meters per Second
+const double massOfShell = 954.5;                    //Kilograms
 const double forceOfGravity = -9.8*(massOfShell);   //Meters per Second per second
 const double airDensity = 1.225;
-const double dragCoefficiant = 0.1;
-const double shellDiameter = (18*0.0254);                                                 //Diameter of Shell in meters
-const double shellArea = (0.25)*(3.14159265358979323846)*(shellDiameter*shellDiameter); //Cross sectional area of Shell
-const double passesPerSecond = 1000;
+const double dragCoefficiant = 0.3;
+const double shellDiameter = (16*0.0254);                                                 //Diameter of Shell in meters
+const double shellArea = (3.14159265358979323846)*((shellDiameter/2)*(shellDiameter/2)); //Cross sectional area of Shell
+const double passesPerSecond = 100000;
 
 double currentHorizontalDistance = 0;
 double currentHeight = 0;
@@ -55,21 +55,21 @@ void updatePosition(){
 
     //Find change in velocity
     xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) + xAxisAcceleration );               // calculate velocity in the x-axis
-    deltaX = xAxisVelocity;
+    deltaX = (( cos(currentShellAngle)*currentVelocity)/passesPerSecond + xAxisAcceleration );
     yAxisVelocity = (( sin(currentShellAngle)*currentVelocity) + yAxisAcceleration);                // calculate velocity in the y-axis
-    deltaY = yAxisVelocity;
+    deltaY = (( sin(currentShellAngle)*currentVelocity)/passesPerSecond + yAxisAcceleration);
 
 
     //Find the next position after one pass
-    nextHorizontalPosition = currentHorizontalDistance + (xAxisVelocity/passesPerSecond);
-    nextVerticalPosition = currentHeight + (yAxisVelocity/passesPerSecond);
+    nextHorizontalPosition = currentHorizontalDistance + (deltaX);
+    nextVerticalPosition = currentHeight + (deltaY);
 
     //Update the current velocity
     currentVelocity = fabs( sqrt( ( (xAxisVelocity)*(xAxisVelocity) + (yAxisVelocity)*(yAxisVelocity) ) )) ;
 
     //Update the current shell angle. Do this by combining the direction of the velocity with the direction of the acceleration
     //printf("Current shell angle before Calculation: %5.4f \n",currentShellAngle);
-    currentShellAngle = atan((deltaY) / (deltaX) ); ///@TODO this does not work properly yet
+    currentShellAngle = atan((yAxisVelocity) / (xAxisVelocity) ); ///@TODO this does not work properly yet
     //printf("Current shell angle after Calculation:  %5.4f \n",currentShellAngle);
 
 

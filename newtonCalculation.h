@@ -21,6 +21,7 @@ extern double currentHorizontalDistance; //Distance Shell has currently traveled
 extern double currentHeight; //Current Height of the Shell
 extern double currentVelocity;
 extern double currentShellAngle;
+extern const double passesPerSecond;
 
 extern unsigned currentTime; //Current time in millisecond
 
