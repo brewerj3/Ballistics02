@@ -15,6 +15,7 @@ int main() {
         }
         updatePosition();
     }
-    printf("Range: %0.2fm Time: %is Angle: %0.2f\n",(currentHorizontalDistance), (currentTime/1000), (currentShellAngle*(180/3.14159265358979323846)));
+    printf("Range: %0.2fm Time: %is Angle: %0.2f degrees\n",(currentHorizontalDistance), (currentTime/1000), (currentShellAngle*(180/3.14159265358979323846)));
+    printf("Range: %0.2f Yards \n",(currentHorizontalDistance*1.09361));
     return 0;
 }
