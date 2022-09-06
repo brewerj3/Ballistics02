@@ -16,7 +16,7 @@
 const double angleOfGunInDegrees = 41; //Angle
 const double initialVelocity = 823;  //Meters per Second
 const double massOfShell = 1315;  //Kilograms
-const double forceOfGravity = 9.8*(massOfShell); //Meters per Second per second
+const double forceOfGravity = -9.8*(massOfShell); //Meters per Second per second
 const double airDensity = 1.225;
 const double dragCoefficiant = 0.1;
 const double shellDiameter = 0.4064; //Diameter of Shell in meters
@@ -34,18 +34,24 @@ double nextHorizontalPosition = 0;
 double nextVerticalPosition = 0;
 double xAxisVelocity = 0;
 double xAxisAcceleration = 0;
+double xAxisForce = 0;
 double yAxisVelocity = 0;
 double yAxisAcceleration = 0;
+double yAxisForce = 0;
 double deltaY = 0;
 double deltaX = 0;
 
 void updatePosition(){
-    //Find the force of the air on the shell in
-    forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*(currentVelocity*currentVelocity)));
+    //Find the force of the air on the shell in one pass
+    forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*((currentVelocity/passesPerSecond)*(currentVelocity/passesPerSecond))));
+
+    //Find the force in both axis
+    xAxisForce = ( cos(currentShellAngle)*forceOfAirOnShell);
+    yAxisForce = ( sin(currentShellAngle)*forceOfAirOnShell) + (forceOfGravity/passesPerSecond);
 
     //Find Acceleration in both axis
-    xAxisAcceleration = (  ( cos(currentShellAngle)*forceOfAirOnShell) / (massOfShell) )/(passesPerSecond*passesPerSecond); // x-axis acceleration from drag
-    yAxisAcceleration = (( (sin(currentShellAngle)*forceOfAirOnShell ) / (massOfShell)) - forceOfGravity)/(passesPerSecond*passesPerSecond); //acceleration from drag and gravity
+    xAxisAcceleration = (xAxisForce/massOfShell); // x-axis acceleration from drag
+    yAxisAcceleration = (yAxisForce/massOfShell); //acceleration from drag and gravity
 
     xAxisVelocity = (( cos(currentShellAngle)*currentVelocity) ); // calculate velocity in the x-axis
     deltaX = xAxisVelocity;
@@ -81,5 +87,5 @@ void updatePosition(){
 
     //Update the current time
     currentTime++;
-    printf("Time: [%5.i]  | X: [%5.2f]  | Y:  [%5.2f] | Angle  [%5.2f]  | Drag: [%5.2f]  |X-Axis acceleration: [%5.4f]  | Y-Axis acceleration: [%5.4f]  | Current Velocity [%5.2f]\n",currentTime,currentHorizontalDistance,currentHeight,currentShellAngle,forceOfAirOnShell,xAxisAcceleration,yAxisAcceleration,currentVelocity);
+    printf("Time: [%5.i]  | X: [%5.2f]  | Y:  [%5.2f] | Angle  [%5.2f]  | Drag: [%5.4f]  |X-Axis acceleration: [%5.4f]  | Y-Axis acceleration: [%5.4f]  | Current Velocity [%5.4f]\n",currentTime,currentHorizontalDistance,currentHeight,currentShellAngle,forceOfAirOnShell,xAxisAcceleration,yAxisAcceleration,currentVelocity);
 }
