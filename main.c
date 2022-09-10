@@ -17,5 +17,6 @@ int main() {
     }
     printf("Range: %0.2fm Time: %fs Angle: %0.2f degrees\n",(currentHorizontalDistance), (currentTime/passesPerSecond), (currentShellAngle*(180/3.14159265358979323846)));
     printf("Range: %0.2f Yards \n",(currentHorizontalDistance*1.09361));
+    printf("Velocity at Impact: %4.2f m/s\n",currentVelocity);
     return 0;
 }

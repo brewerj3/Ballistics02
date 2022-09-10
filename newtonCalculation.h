@@ -12,16 +12,17 @@
 #define UNTITLED1_NEWTONCALCULATION_H
 
 #pragma once
+
 #include <math.h>
-
-
-
 
 extern double currentHorizontalDistance; //Distance Shell has currently traveled horizontally
 extern double currentHeight; //Current Height of the Shell
 extern double currentVelocity;
 extern double currentShellAngle;
+
+extern const double massOfShell;
 extern const double passesPerSecond;
+extern const double shellDiameter;
 
 extern unsigned currentTime; //Current time in millisecond
 
