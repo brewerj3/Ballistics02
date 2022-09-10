@@ -17,8 +17,7 @@
 
 #include "newtonCalculation.h"
 
-extern double penetration = 0;
-
 extern double findArmorPenetration();
+extern double findDeckPenetration();
 
 #endif //UNTITLED1_ARMORPENETRATION_H
