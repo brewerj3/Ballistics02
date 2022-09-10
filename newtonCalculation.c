@@ -13,15 +13,15 @@
 #include "newtonCalculation.h"
 #include <math.h>
 
-const double angleOfGunInDegrees = 40;              //Angle
-const double initialVelocity = 914;                 //Muzzle Velocity in Meters per Second
-const double massOfShell = 954.5;                    //Kilograms
-const double forceOfGravity = -9.8*(massOfShell);   //Meters per Second per second
+const double angleOfGunInDegrees = 40;                  //Angle
+const double initialVelocity = 914;                     //Muzzle Velocity in Meters per Second
+const double massOfShell = 954.5;                       //Kilograms
+const double forceOfGravity = -9.8*(massOfShell);       //Meters per Second per second
 const double airDensity = 1.225;
-const double dragCoefficiant = 0.3;
-const double shellDiameter = (16*0.0254);                                                 //Diameter of Shell in meters
-const double shellArea = (3.14159265358979323846)*((shellDiameter/2)*(shellDiameter/2)); //Cross sectional area of Shell
-const double passesPerSecond = 100000;
+const double dragCoefficiant = 0.237;
+const double shellDiameter = (16*0.0254);                                                   //Diameter of Shell in meters
+const double shellArea = (3.14159265358979323846)*((shellDiameter/2)*(shellDiameter/2));    //Cross sectional area of Shell
+const double passesPerSecond = 1000;
 
 double currentHorizontalDistance = 0;
 double currentHeight = 0;
@@ -43,7 +43,7 @@ double deltaX = 0;
 
 void updatePosition(){
     //Find the force of the air on the shell in one pass
-    forceOfAirOnShell = -(((0.5)*dragCoefficiant*airDensity*shellArea*((currentVelocity/passesPerSecond)*(currentVelocity/passesPerSecond))));
+    forceOfAirOnShell = -( ((0.5)*dragCoefficiant*airDensity*shellArea*((currentVelocity)*(currentVelocity)))/passesPerSecond );
 
     //Find the force in both axis
     xAxisForce = ( cos(currentShellAngle)*forceOfAirOnShell);                                       //This is in one Pass
@@ -79,5 +79,5 @@ void updatePosition(){
 
     //Update the current time
     currentTime++;
-    //printf("Time: [%5.i]  | X: [%5.2f]  | Y:  [%5.2f] | Angle  [%5.2f]  | Drag: [%5.4f]  |X-Axis acceleration: [%5.4f]  | Y-Axis acceleration: [%5.4f]  | Current Velocity [%5.4f]\n",currentTime,currentHorizontalDistance,currentHeight,currentShellAngle,forceOfAirOnShell,xAxisAcceleration,yAxisAcceleration,currentVelocity);
+    //printf("Time: [%5f]  | X: [%5.2f]  | Y:  [%5.2f] | Angle  [%5.2f]  | Drag: [%5.4f]  |X-Axis acceleration: [%5.4f]  | Y-Axis acceleration: [%5.4f]  | Current Velocity [%5.4f]\n",(currentTime/passesPerSecond),currentHorizontalDistance,currentHeight,currentShellAngle,forceOfAirOnShell,xAxisAcceleration,yAxisAcceleration,currentVelocity);
 }
