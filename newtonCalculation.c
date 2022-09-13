@@ -13,10 +13,10 @@
 #include "newtonCalculation.h"
 #include <math.h>
 
-const double angleOfGunInDegrees = 40;                  //Angle
-const double initialVelocity = 914;                     //Muzzle Velocity in Meters per Second
-const double massOfShell = 954.5;                       //Kilograms
-const double forceOfGravity = -9.8*(massOfShell);       //Meters per Second per second
+const double angleOfGunInDegrees = 20;                 //Angle
+const double initialVelocity = 762;                    //Muzzle Velocity in Meters per Second
+const double massOfShell = 1225;                       //Kilograms
+const double forceOfGravity = -9.8*(massOfShell);      //Meters per Second per second
 const double airDensity = 1.225;
 const double dragCoefficiant = 0.1774;
 const double shellDiameter = (16*0.0254);                                                   //Diameter of Shell in meters
