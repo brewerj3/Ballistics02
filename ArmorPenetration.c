@@ -10,20 +10,26 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <math.h>
+#include <stdlib.h>
 
 #include "ArmorPenetration.h"
 #include "newtonCalculation.h"
 
 double penetration = 0;
 double deckPenetration = 0;
+double beltPenetration = 0;
 
 double findArmorPenetration(void) {
     penetration = ((0.0004689*pow((massOfShell*2.2), 0.55))/(pow((shellDiameter*39.37), 0.65)))*pow((currentVelocity*3.28084), 1.1);
+    deckPenetration = cos(currentShellAngle)*penetration;
+    beltPenetration = fabs(sin(currentShellAngle)*penetration);
     return penetration;
 }
 
 double findDeckPenetration(void) {
-    penetration = findArmorPenetration();
-    deckPenetration = acos(currentShellAngle)*penetration;
     return deckPenetration;
+}
+
+double findBeltPenetration(void) {
+    return beltPenetration;
 }

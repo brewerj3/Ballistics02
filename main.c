@@ -20,6 +20,7 @@ int main() {
     printf("Range: %0.2f Yards \n",(currentHorizontalDistance*1.09361));
     printf("Velocity at Impact:             %5.2f m/s\n",currentVelocity);
     printf("Maximum armor penetration:      %5.2f inches\n",findArmorPenetration());
-    printf("Maximum deck Armor Penetration: %5.2f inches\n",findDeckPenetration());
+    printf("Maximum deck armor penetration: %5.2f inches\n",findDeckPenetration());
+    printf("Maximum belt armor penetration: %5.2f inches \n",findBeltPenetration());
     return 0;
 }

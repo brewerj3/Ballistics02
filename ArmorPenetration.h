@@ -19,5 +19,6 @@
 
 extern double findArmorPenetration();
 extern double findDeckPenetration();
+extern double findBeltPenetration();
 
 #endif //UNTITLED1_ARMORPENETRATION_H
